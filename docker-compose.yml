@@ -6,6 +6,7 @@ services:
     mysql_db:
         container_name: mysql_db
         image: "mysql:latest"
+        restart: always
         networks:
             - my_network
         environment:
@@ -15,6 +16,12 @@ services:
             MYSQL_PASSWORD: 12345678
         ports:
             - 3306:3306
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 30s
+            retries: 5
+            start_period: 30s
+            timeout: 30s
     redis:
         container_name: redis
         image: "redis:latest"
@@ -22,21 +29,21 @@ services:
             - my_network
         ports: 
             - 6379:6379
-    vote:
-        build:
-            context: ./voting-app
-            dockerfile : Dockerfile
-        container_name: vote-app
-        restart: always
-        networks:
-            - my_network
-        ports:
-            - 8080:8080
-        depends_on:
-            - redis
-        environment:
-            SPRING_REDIS_HOST: redis
-            SPRING_REDIS_PORT: 6379
+    # vote:
+    #     build:
+    #         context: ./voting-app
+    #         dockerfile : Dockerfile
+    #     container_name: vote-app
+    #     restart: always
+    #     networks:
+    #         - my_network
+    #     ports:
+    #         - 8080:8080
+    #     depends_on:
+    #         - redis
+    #     environment:
+    #         SPRING_REDIS_HOST: redis
+    #         SPRING_REDIS_PORT: 6379
     worker:
         build:
             context: ./worker
