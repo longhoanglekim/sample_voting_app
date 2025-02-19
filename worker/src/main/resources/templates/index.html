@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Results</title>
+</head>
+<body>
+<h1>Vote Results</h1>
+
+<p>Dogs: <span id="dogVotes">[[${dogs}]]</span>%</p>
+<p>Cats: <span id="catVotes">[[${cats}]]</span>%</p>
+
+<div>
+    <h3>Vote Percentage</h3>
+    <div>
+        <div id="dogBar" style="width: 0%; background-color: lightblue; height: 30px; text-align: center; color: black;"></div>
+        <div id="catBar" style="width: 0%; background-color: lightcoral; height: 30px; text-align: center; color: black;"></div>
+    </div>
+</div>
+
+<!-- Truyền giá trị từ Spring Boot Model vào data-* attributes -->
+<div id="voteResults" data-dogs="${dogs}" data-cats="${cats}"></div>
+</body>
+</html>

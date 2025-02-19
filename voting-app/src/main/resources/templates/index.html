@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vote for your favorite pet!</title>
+</head>
+<body>
+<h1>Vote for your favorite pet!</h1>
+
+<form method="post">
+    <button type="submit" name="vote" value="optionA">[[${optionA}]]</button>
+    <button type="submit" name="vote" value="optionB">[[${optionB}]]</button>
+</form>
+
+<p>Your voter ID: <strong>[[${voterId}]]</strong></p>
+
+<div th:if="${vote}">
+    <p>You voted for: <strong>[[${vote}]]</strong></p>
+</div>
+</body>
+</html>
